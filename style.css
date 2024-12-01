@@ -10,6 +10,18 @@ body {
 
 p {
     margin: 0px;
+    padding-bottom: 20px;
+}
+
+a {
+    color: #fff;
+
+
+}
+
+a:hover {
+    color: #fff;
+    text-decoration: none;
 }
 
 @font-face {
@@ -22,14 +34,17 @@ p {
 }
 
 .text-container {
-    font-family: 'Styrene A';
-    font-size: 20px;
+     font-family: 'Styrene A';
+    font-size: 38px;
+    line-height: 1.1;
     left: 0;
     top: 0;
     color: #fff;
     mix-blend-mode: difference;
     margin: 20px;
     position: absolute;
+
+ 
 }
 
 .logo-container {
@@ -42,6 +57,7 @@ p {
     display: block;
     mix-blend-mode: difference;
     z-index: 100;
+     
 }
 
 /* Mobile-specific styles */
