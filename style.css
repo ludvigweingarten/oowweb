@@ -1,7 +1,7 @@
 /* Reset body margins */
 body {
     margin: 0;
-    height: 100vh;
+    height: 95vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,28 +21,32 @@ p {
     font-display: swap;
 }
 
-
-
 .text-container {
     font-family: 'Styrene A';
     font-size: 20px;
     left: 0;
     top: 0;
-    color: black;
+    color: #fff;
+    mix-blend-mode: difference;
     margin: 20px;
     position: absolute;
 }
 
-
-
 .logo-container {
-    width: 90%;
+    width: 100%;
     position: absolute;
 }
 
-
 .logo-container img {
-    max-width: 100%;
-    max-height: 100%;
+    margin: 20px;
     display: block;
+    mix-blend-mode: difference;
+    z-index: 100;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) { /* Adjust max-width as needed */
+    .logo-container img {
+        content: url('assets/OOW_SYMBOL.svg'); /* Replace logo for mobile */
+    }
 }
