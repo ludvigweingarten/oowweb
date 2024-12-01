@@ -8,8 +8,36 @@ body {
     background-color: #fff; /* Optional: Set background color to white */
 }
 
+p {
+    margin: 0px;
+}
+
+@font-face {
+    font-family: 'Styrene A';
+    src: url('StyreneA-Medium.woff2') format('woff2'),
+        url('StyreneA-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+.text-container {
+    font-family: 'Styrene A';
+    font-size: 20px;
+    left: 0;
+    top: 0;
+    color: black;
+    margin: 20px;
+    position: absolute;
+}
+
+
+
 .logo-container {
     width: 90%;
+    position: absolute;
 }
 
 
