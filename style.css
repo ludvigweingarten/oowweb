@@ -6,11 +6,12 @@ html {
 /* Reset body margins */
 body {
     margin: 0;
-    height: 95vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #fff; /* Optional: Set background color to white */
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 p {
@@ -21,14 +22,11 @@ p {
 a {
     color: #fff;
     text-decoration: none;
-
-
 }
 
 a:hover {
     color: #fff;
     text-decoration: underline;
-    
 }
 
 @font-face {
@@ -41,7 +39,7 @@ a:hover {
 }
 
 .text-container {
-     font-family: 'Styrene A';
+    font-family: 'Styrene A';
     font-size: 18px;
     line-height: 1.1;
     left: 0;
@@ -51,21 +49,23 @@ a:hover {
     margin: 20px;
     position: absolute;
     max-width: 580px;
-
- 
 }
 
 .logo-container {
     width: 100%;
-    position: absolute;
+    position: fixed; /* Keep the logo fixed */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset centering */
+    z-index: 100; /* Ensure it's above other content */
+     mix-blend-mode: difference;
+      
 }
 
 .logo-container img {
     margin: 20px;
     display: block;
     mix-blend-mode: difference;
-    z-index: 100;
-     
 }
 
 /* Mobile-specific styles */
