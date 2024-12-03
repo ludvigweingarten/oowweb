@@ -48,18 +48,19 @@ a:hover {
     mix-blend-mode: difference;
     margin: 20px;
     position: absolute;
-    max-width: 580px;
+    max-width: 640px;
+   
 }
 
 .logo-container {
-    width: 100%;
+    width: 70%;
     position: fixed; /* Keep the logo fixed */
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%); /* Offset centering */
     z-index: 100; /* Ensure it's above other content */
      mix-blend-mode: difference;
-      
+
 }
 
 .logo-container img {
