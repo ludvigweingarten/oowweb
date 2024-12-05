@@ -53,7 +53,7 @@ a:hover {
 }
 
 .logo-container {
-    width: 70%;
+    width: 100%;
     position: fixed; /* Keep the logo fixed */
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
