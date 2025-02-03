@@ -67,6 +67,11 @@ a:hover {
    
 }
 
+.text-container-bottom p{
+    padding-bottom: 0px;
+   
+}
+
 .logo-container {
     width: 100%;
     position: fixed; /* Keep the logo fixed */
