@@ -8,6 +8,7 @@ body {
     margin: 0;
     height: 100vh;
     display: flex;
+    overflow: hidden;
     justify-content: center;
     align-items: center;
     background-color: #fff; /* Optional: Set background color to white */
