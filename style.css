@@ -52,6 +52,20 @@ a:hover {
    
 }
 
+.text-container-bottom {
+    font-family: 'Styrene A';
+    font-size: 16px;
+    line-height: 1.1;
+    left: 0;
+    bottom: 0;
+    color: #fff;
+    mix-blend-mode: difference;
+    margin: 20px;
+    position: absolute;
+    max-width: 630px;
+   
+}
+
 .logo-container {
     width: 100%;
     position: fixed; /* Keep the logo fixed */
