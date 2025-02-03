@@ -17,18 +17,18 @@ body {
 
 p {
     margin: 0px;
-    padding-bottom: 20px;
-        font-size: 15px;
+  
+        font-size: 16px;
 }
 
 a {
-    color: #fff;
+    color: red;
     text-decoration: none;
 }
 
 a:hover {
-    color: #fff;
-    text-decoration: underline;
+    color: #000;
+    text-decoration: none;
 }
 
 @font-face {
@@ -45,8 +45,7 @@ a:hover {
     line-height: 1.1;
     left: 0;
     top: 0;
-    color: #fff;
-    mix-blend-mode: difference;
+    color: #000;
     margin: 20px;
     position: absolute;
     max-width: 630px;
@@ -58,8 +57,7 @@ a:hover {
     line-height: 1.1;
     left: 0;
     bottom: 0;
-    color: #fff;
-    mix-blend-mode: difference;
+    color: #000;
     margin: 20px;
     position: absolute;
     max-width: 630px;
