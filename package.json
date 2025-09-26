@@ -1,0 +1,13 @@
+{
+  "name": "oow-site",
+  "version": "1.0.0",
+  "description": "Enkel 1-sides portfolio med bildspel och manifest for bilder",
+  "main": "script.js",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "build:manifest": "node tools/generate-manifest.mjs",
+    "dev": "npx serve -p 5173",
+    "start": "npx serve -p 5173"
+  }
+}

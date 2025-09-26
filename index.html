@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Office Oblitas Weingarten</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.svg">
-    <link rel="mask-icon" href="mask-icon.svg" color="#000000">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Office Oblitas Weingarten is a design-centric studio based in Stockholm and working globally. We build brands from idea to complete identity through strategy, visual design and brand worlds that unite function and beauty — spanning branding, digital design, art direction, book and packaging design.">
+  <title>Office Oblitas Weingarten</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="logo-container">
-        <a href="mailto:office@o-ow.com">
-            <img src="assets/OOW_LOGO.svg" alt="OOW Logo">
-        </a>
-    </div>
-    <div class="text-container">
-        <p>Office Oblitas Weingarten is a design-centric, network-driven practice where ideas are conceived, tested and refined into solutions for real-world challenges. We help founders, institutions and brands stand out and stay relevant in a highly competitive, hyperconnected world.</p>
-      
-    </div>
+  <!-- Hero: bildspel + logotyp -->
+  <header class="hero" aria-label="Utvalda arbeten">
+  <div class="hero-frame">
+    <div class="slideshow" role="region" aria-roledescription="karusell" aria-label="Portfolio-bilder"></div>
+  </div>
+  <img class="brand-logo" src="assets/logotype.svg" alt="OOW logotyp" />
+</header>
 
-    <div class="text-container-bottom">
-        <p>Our experience spans a wide range of industries, clients and projects across five continents. Past commissions include Architects Sweden, COS, H&M, Kasthall, LVMH, Moderna Museet, National Museum of Science and Technology, On, OnceMore, Stella McCartney, Swiss International Air Lines, Theory, Vitra and more. (<a href="mailto:office@o-ow.com">Contact</a>)</p>
+  <!-- Innehåll laddas dynamiskt från content.md -->
+  <main id="content" class="content"></main>
 
-    </div>
+  <footer class="footer">
+    <p>© <span id="year"></span> Office Oblitas Weingarten</p>
+  </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
