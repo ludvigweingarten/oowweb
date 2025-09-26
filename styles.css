@@ -1,7 +1,7 @@
 /* 1) Font */
 @font-face {
   font-family: 'StyreneA';
-  src: url('assets/fonts/StyreneA-Medium.woff') format('opentype');
+  src: url('assets/fonts/StyreneA-Medium.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -37,8 +37,12 @@ h1,h2,h3,h4,h5,h6{
 /* 4) Hero – standard (landscape): overlay */
 .hero{
   position: relative;
-  min-height: 100vh;
-  padding: var(--frame);
+  min-height: 100vh;                 /* fallback */
+  min-height: 100svh;                /* iOS: synlig viewporthöjd */
+  padding:
+    calc(var(--frame) + env(safe-area-inset-top))
+    var(--frame)
+    calc(var(--frame) + env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,22 +90,37 @@ h1,h2,h3,h4,h5,h6{
 }
 .slideshow .slide.active{ display: block; }
 
-/* 5) Content */
+/* 5) Content – MULTI-COLUMN i stället för grid */
 .content{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+  /* default: en kolumn (mobil och smala vyer) */
+  column-count: 1;
+  column-gap: 3rem;
   padding: 4rem var(--frame) 6rem;
   max-width: var(--maxw);
   margin: 0 auto;
 }
-.section p{ margin: 0 0 1rem; }
-.section ul,.section ol{ margin: .5rem 0 1.5rem 1.5rem; padding: 0; }
-.section li{ margin-bottom: .4rem; }
+
+/* varje sektion ska hållas ihop och inte brytas mitt i */
+.section{
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin: 0 0 1.3rem;
+  display: inline-block; /* gör att break-inside funkar robust */
+  width: 100%;
+}
+
+/* tvinga kolumnbrytning efter en viss sektion (vi sätter klass via JS) */
+.section.break-after{
+  break-after: column;
+  -webkit-column-break-after: column;
+}
+
+.section p{ margin: 0 0 0rem; }
+.section ul,.section ol{ margin: .5rem 0 0rem 1.5rem!important; padding: 0!important; }
+.section li{ margin-bottom: 1.3rem; }
 
 /* 6) Footer */
 .footer{
-  grid-column: 1 / -1;
   color: var(--muted);
   font-size: .9em;
   border-top: 1px solid #e6e6e2;
@@ -110,12 +129,14 @@ h1,h2,h3,h4,h5,h6{
   text-align: center;
 }
 
-/* 7) Content-breakpoint (landscape desktop) */
+/* 7) Desktop: 2 kolumner */
 @media (min-width: 900px){
-  .content{ grid-template-columns: repeat(2, 1fr); }
+  .content{
+    column-count: 2;   /* → två kolumner, flytande */
+  }
 }
 
-/* 8) PORTRAIT-läge: dela hero i två halvor (50/50) */
+/* 8) PORTRAIT-läge: två halvor för hero */
 @media (orientation: portrait){
   .hero{
     display: grid;
@@ -124,20 +145,18 @@ h1,h2,h3,h4,h5,h6{
     justify-items: center;
   }
 
-  /* Loggan placeras i övre halvan, centrerad */
   .brand-logo{
-    position: static;                    /* lämnar overlay-position */
+    position: static;
     transform: none;
     width: calc(100% - var(--frame)*2);
     height: auto;
-    max-height: calc(50vh - var(--frame)*2);
+    max-height: calc(50svh - var(--frame)*2 - env(safe-area-inset-top));
     max-width: var(--maxw);
     align-self: center;
     justify-self: center;
     grid-row: 1 / 2;
   }
 
-  /* Bildspelsboxen i nedre halvan, centrerad */
   .hero-frame{
     position: static;
     align-self: center;
@@ -145,9 +164,8 @@ h1,h2,h3,h4,h5,h6{
     grid-row: 2 / 3;
   }
 
-  /* Slideshowmått sätts av JS men vi ger ett mjukt tak */
   .slideshow{
-    width: auto;  /* sätts i JS – låt inte CSS tvinga 0 här */
+    width: auto;
     height: auto;
   }
 }

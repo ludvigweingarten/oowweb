@@ -37,6 +37,13 @@ function getFramePx() {
   return parseFloat(cs.paddingLeft) || 0;
 }
 
+// iOS: använd synliga viewportens höjd när den finns
+function getViewportHeight() {
+  return (window.visualViewport && window.visualViewport.height)
+    ? window.visualViewport.height
+    : window.innerHeight;
+}
+
 // Sätt boxens storlek så att den matchar aktiv bild och layoutläge
 function fitActive() {
   const heroFrame = document.querySelector(".hero-frame");
@@ -48,18 +55,16 @@ function fitActive() {
 
   const pad = getFramePx();
   const vw = window.innerWidth;
-  const vh = window.innerHeight;
+  const vh = getViewportHeight();
   const isPortrait = vh > vw;
 
   // ----- maxbredd / maxhöjd beroende på orientation -----
   let maxW, maxH;
 
   if (isPortrait) {
-    // PORTRAIT: bildspelet ska ligga i nedre halvan (50% av viewport)
-    // Bredd: full bredd minus marginaler
-    maxW = vw - pad * 2;
-    // Höjd: halva viewporten minus marginaler
-    maxH = Math.max(1, (vh / 2) - pad * 1.5); // lite extra luft
+    // PORTRAIT: bildspelet i nedre halvan (50% av synlig viewport)
+    maxW = vw - pad * 2;                               // full bredd minus marginaler
+    maxH = Math.max(1, (vh / 2) - pad * 1.5);          // halva höjden – lite luft
   } else {
     // LANDSCAPE: desktop = procent av viewport, smalt = fullbredd
     const desktopMaxW = vw * DESKTOP_VW_FRACTION;
@@ -96,7 +101,7 @@ function showNext() {
   else slides[i].addEventListener("load", fitActive, { once: true });
 }
 
-// Init
+// Init slideshow
 loadSlides()
   .then(loaded => {
     slides = loaded;
@@ -105,6 +110,10 @@ loadSlides()
       setInterval(showNext, 200);
       window.addEventListener("resize", fitActive);
       window.addEventListener("orientationchange", fitActive);
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", fitActive);
+        window.visualViewport.addEventListener("scroll", fitActive);
+      }
     }
   })
   .catch(console.error);
@@ -140,9 +149,15 @@ function parseSimpleMarkdown(md) {
 
   for (const raw of lines) {
     const line = raw.trim();
-    const h2 = line.match(/^##\s+(.*)$/); if (h2){ flushSection(); current={heading:h2[1].trim(),blocks:[]}; continue; }
-    const ul = line.match(/^-\s+(.*)$/);  if (ul){ flushPara(); if(!listBuf||listBuf.type!=='ul'){flushList(); listBuf={type:'ul',items:[]};} listBuf.items.push(ul[1]); continue; }
-    const ol = line.match(/^\d+\.\s+(.*)$/); if (ol){ flushPara(); if(!listBuf||listBuf.type!=='ol'){flushList(); listBuf={type:'ol',items:[]};} listBuf.items.push(ol[1]); continue; }
+    const h2 = line.match(/^##\s+(.*)$/);
+    if (h2) { flushSection(); current = { heading: h2[1].trim(), blocks: [] }; continue; }
+
+    const ul = line.match(/^-\s+(.*)$/);
+    if (ul) { flushPara(); if (!listBuf || listBuf.type!=="ul"){flushList(); listBuf={type:"ul",items:[]};} listBuf.items.push(ul[1]); continue; }
+
+    const ol = line.match(/^\d+\.\s+(.*)$/);
+    if (ol) { flushPara(); if (!listBuf || listBuf.type!=="ol"){flushList(); listBuf={type:"ol",items:[]};} listBuf.items.push(ol[1]); continue; }
+
     if (line === "") { flushPara(); flushList(); continue; }
     paraBuf.push(line);
   }
@@ -152,31 +167,57 @@ function parseSimpleMarkdown(md) {
   sections.forEach(sec => {
     const sectionEl = document.createElement("section");
     sectionEl.className = "section";
-    if (sec.heading){ const h=document.createElement("h2"); h.textContent=sec.heading; sectionEl.appendChild(h); }
-    sec.blocks.forEach(b=>{
-      if (b.type==="p"){ const p=document.createElement("p"); p.textContent=b.text; sectionEl.appendChild(p); }
-      else if (b.type==="ul"||b.type==="ol"){
-        const list=document.createElement(b.type);
-        list.style.margin="0.5rem 0 1.5rem 1.5rem";
-        b.items.forEach(t=>{ const li=document.createElement("li"); li.textContent=t; list.appendChild(li); });
+    if (sec.heading) {
+      const h = document.createElement("h2");
+      h.textContent = sec.heading;
+      sectionEl.appendChild(h);
+    }
+    sec.blocks.forEach(b => {
+      if (b.type === "p") {
+        const p = document.createElement("p");
+        p.textContent = b.text;
+        sectionEl.appendChild(p);
+      } else if (b.type === "ul" || b.type === "ol") {
+        const list = document.createElement(b.type);
+        list.style.margin = "0.5rem 0 1.5rem 1.5rem";
+        b.items.forEach(itemText => {
+          const li = document.createElement("li");
+          li.textContent = itemText;
+          list.appendChild(li);
+        });
         sectionEl.appendChild(list);
       }
     });
     frag.appendChild(sectionEl);
   });
+
   return frag;
 }
 
+// Ladda content.md och lägg in kolumnbrytning efter “Services”
 async function loadContent() {
   try {
     const res = await fetch("content.md", { cache: "no-store" });
     if (!res.ok) throw new Error("Kunde inte läsa content.md");
     const md = await res.text();
     const frag = parseSimpleMarkdown(md);
+
     const container = document.getElementById("content");
     container.innerHTML = "";
     container.appendChild(frag);
-  } catch (e) { console.error(e); }
+
+    // → Tvinga kolumnbrytning efter sektionen "Services"
+    const sections = container.querySelectorAll(".section");
+    sections.forEach(sec => {
+      const h = sec.querySelector("h2");
+      if (h && /^services$/i.test(h.textContent.trim())) {
+        sec.classList.add("break-after");
+      }
+    });
+
+  } catch (e) {
+    console.error(e);
+  }
 }
 loadContent();
 
