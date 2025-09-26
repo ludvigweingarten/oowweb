@@ -15,7 +15,7 @@
 
   --frame: clamp(10px, 2.2vw, 28px);
   --radius: 18px;
-  --maxw: 1600px;
+  --maxw: 1300px;
   --font-size: clamp(16px, 1.8vw, 20px);
 }
 
@@ -121,11 +121,12 @@ h1,h2,h3,h4,h5,h6{
 
 /* 6) Footer */
 .footer{
-  color: var(--muted);
+  color: #000;
   font-size: .9em;
-  border-top: 1px solid #e6e6e2;
+  border-top: 2px solid #000;
   padding-top: 1rem;
   margin-top: 2rem;
+  padding-bottom: 1rem;
   text-align: center;
 }
 
