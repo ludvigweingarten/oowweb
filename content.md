@@ -13,10 +13,10 @@ Good design sits at the crossroads of function and beauty. It engages, compels a
 ## Services
 Brand Development, Strategy, Visual Identity, Art Direction, Book Design, Signage & Environmental, Packaging, Digital Design.
 
-## Past & Present Commissions
+## Commissions
 Our experience spans an intentionally wide range of industries, clients, and projects across five continents. Selected clients include Adidas, ACNE, Aga Khan Fund for Economic Development, Asplunds, Architects Sweden, Arwidsson Talks, Bally, BMW, Bob Bob Ricard, Boeing, British Airways, Building Legacy, British Airways, B&B Italia, C.QP, Candy & Candy, COS, David Collins Studio, Emporio Armani, Expormim, Gap, Genova Property Group, Givaudan, Gianfranco Ferré, HOPE, House by Sanz, H&M, Inditex, James Perse, Kasthall, Knoll International, Kurt Geiger, Kista Limitless, Laurence King Publishing, Londonewcastle, Loewe, LVMH, Mango, Moderna Museet, Moncler, Monocle Magazine, Nina Ricci, Netflix, Nike Woman, Nina Ricci, Nokia, Oscar Properties, Oriflame, OnceMore by Södra, ON Running, Parley for the Oceans, PUIG, Pull & Bear, Prada Sport, Related, Selfridges, Stella McCartney, Savoir Joaillerie, Spanish Trade Commission, Spotify, Signum, Svenskt Tenn, Swiss International Air Lines, Tom Wood, The North Face, The Future Laboratory, TID Watches, Theory, Vitra and more.
 
-## Employment & Internships
+## Employment
 There are no current openings. We occasionally take internships. To apply to the studio please submit a CV and if applicable a portfolio in PDF format to office@o-ow.com.
 
 ## Contact

@@ -13,7 +13,7 @@
   --ink: #0a0a0a;
   --muted: #7d7d7d;
 
-  --frame: clamp(10px, 2.2vw, 28px);
+  --frame: clamp(10px, 4.2vw, 28px);
   --radius: 18px;
   --maxw: 1300px;
   --font-size: clamp(16px, 1.8vw, 20px);
@@ -92,32 +92,59 @@ h1,h2,h3,h4,h5,h6{
 
 /* 5) Content – MULTI-COLUMN i stället för grid */
 .content{
-  /* default: en kolumn (mobil och smala vyer) */
-  column-count: 1;
+  column-count: 1;            /* mobil/smalt */
   column-gap: 3rem;
   padding: 4rem var(--frame) 6rem;
   max-width: var(--maxw);
   margin: 0 auto;
 }
 
-/* varje sektion ska hållas ihop och inte brytas mitt i */
+/* varje sektion hålls ihop och bryts inte mitt i */
 .section{
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
   margin: 0 0 1.3rem;
-  display: inline-block; /* gör att break-inside funkar robust */
+  display: inline-block; /* gör break-inside robust */
   width: 100%;
 }
 
-/* tvinga kolumnbrytning efter en viss sektion (vi sätter klass via JS) */
+/* tvingad kolumnbrytning (sätts via JS på “Services”) */
 .section.break-after{
   break-after: column;
   -webkit-column-break-after: column;
 }
 
-.section p{ margin: 0 0 0rem; }
-.section ul,.section ol{ margin: .5rem 0 0rem 1.5rem!important; padding: 0!important; }
-.section li{ margin-bottom: 1.3rem; }
+/* Typografi i sektioner */
+.section p{
+  margin: 0 0 0rem; /* ingen extra bottenmarginal på stycken */
+}
+
+/* Listor: ingen bottenmarginal – luft kommer från li */
+.section ul,
+.section ol{
+  margin: .5rem 0 0rem 1.5rem !important;
+  padding: 0 !important;
+}
+
+/* Luft mellan punkter */
+.section li{
+  margin-bottom: 1.3rem;
+}
+
+/* --- FIX mot “dubbel luft” --- */
+/* 1) ta bort luft på sista punkten i listan */
+.section li:last-child{
+  margin-bottom: 0;
+}
+/* 2) säkerställ att listan i sig inte lägger till extra luft */
+.section ul:last-child,
+.section ol:last-child{
+  margin-bottom: 0 !important;
+}
+/* 3) (valfritt men bra) om sektionen slutar med lista, håll standardmellanrum harmoniskt */
+.section:has(> :is(ul, ol):last-child){
+  margin-bottom: 1.3rem; /* samma som andra sektioner */
+}
 
 /* 6) Footer */
 .footer{
@@ -132,9 +159,7 @@ h1,h2,h3,h4,h5,h6{
 
 /* 7) Desktop: 2 kolumner */
 @media (min-width: 900px){
-  .content{
-    column-count: 2;   /* → två kolumner, flytande */
-  }
+  .content{ column-count: 2; }
 }
 
 /* 8) PORTRAIT-läge: två halvor för hero */
